@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoClipper.ai - Konten.com Automation Suite</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        zinc: {
+                            950: '#09090b',
+                            900: '#18181b',
+                            800: '#27272a',
+                            700: '#3f3f46',
+                            500: '#71717a',
+                            300: '#d4d4d8',
+                            100: '#f4f4f5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen bg-zinc-950 text-zinc-300 font-sans p-4 sm:p-6 selection:bg-violet-500/30">
+
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto flex items-center justify-between mb-8 pb-6 border-b border-zinc-800">
+        <div class="flex items-center gap-3">
+            <div class="bg-violet-600 p-2.5 rounded-xl shadow-lg shadow-violet-600/20 text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.242 4.242 3 3 0 004.242-4.242zm0-5.758a3 3 0 10-4.242-4.242 3 3 0 004.242 4.242z"></path></svg>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold text-zinc-100 flex items-center gap-2">
+                    AutoClipper.ai
+                    <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30 flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Konten.com Connected
+                    </span>
+                </h1>
+                <p class="text-xs text-zinc-500">Automated AI Video Clipping Marketplace Workflow</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="hidden sm:flex items-center gap-2 bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg text-xs">
+                <span class="text-zinc-400">Model: <strong class="text-zinc-200">CPM Monetization Sync</strong></span>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-zinc-800 border border-zinc-700 overflow-hidden ring-2 ring-zinc-700/50">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=RifalCreator&backgroundColor=3f3f46" alt="User Avatar" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left/Main Column -->
+        <div class="lg:col-span-2 flex flex-col gap-6">
+            
+            <!-- Konten.com Campaign Active Banner -->
+            <div class="bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-900/90 border border-zinc-800 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+                <div class="flex items-center gap-3.5">
+                    <div class="p-2.5 rounded-xl border bg-violet-500/10 border-violet-500/30 text-violet-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-sm font-semibold text-zinc-200">Active Konten.com Campaign</h3>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.2 rounded font-medium border border-emerald-500/30 flex items-center gap-1">Ready</span>
+                        </div>
+                        <p class="text-xs text-zinc-400" id="currentCampaignSubtitle">Falcon Pictures - Rate: Rp6.000 / 1K Views</p>
+                    </div>
+                </div>
+                <button onclick="toggleCampaignModal()" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-violet-600 hover:bg-violet-500 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-md shadow-violet-900/20">
+                    <span>Pilih Campaign</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </div>
+
+            <!-- Campaign Selector Modal (Hidden by default) -->
+            <div id="campaignModal" class="hidden bg-zinc-900/95 border border-violet-500/30 rounded-2xl p-5 shadow-2xl">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-zinc-800">
+                    <h4 class="text-sm font-semibold text-zinc-100 flex items-center gap-2">Pilih Campaign Aktif dari Konten.com</h4>
+                    <button onclick="toggleCampaignModal()" class="text-xs text-zinc-500 hover:text-zinc-300 font-medium">Tutup</button>
+                </div>
+                <div class="grid grid-cols-1 gap-2.5 max-h-64 overflow-y-auto pr-1" id="campaignListContainer">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Upload Area & Status State Container -->
+            <div id="workspaceArea">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold text-zinc-100">Source Video Material</h2>
+                    <span id="sourceBadge" class="text-xs bg-violet-500/10 text-violet-400 border border-violet-500/20 px-2.5 py-1 rounded-lg font-medium flex items-center gap-1.5">
+                        Sumber video otomatis dari Falcon Pictures
+                    </span>
+                </div>
+                
+                <div class="relative flex flex-col items-center justify-center p-12 h-80 border-2 border-dashed border-zinc-700 rounded-2xl transition-all bg-zinc-900/50 overflow-hidden">
+                    <div class="absolute inset-0 opacity-15 pointer-events-none">
+                        <img id="bgCoverImg" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80" class="w-full h-full object-cover filter blur-sm">
+                    </div>
+                    <div class="w-20 h-20 mb-4 rounded-2xl overflow-hidden shadow-lg border border-violet-500/30 z-10 relative">
+                        <img id="mainCoverImg" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <h3 id="mainTitle" class="text-lg font-medium text-zinc-100 mb-1 text-center z-10">Falcon Pictures - 3726 MDPL / Awal Mula Hamka Vol.3</h3>
+                    <p id="mainDuration" class="text-sm text-emerald-400 font-medium mb-6 text-center z-10">Tersinkronisasi dengan Brief Campaign (1:45:00)</p>
+                    <label class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-xl cursor-pointer text-xs font-medium border border-zinc-700 z-10">
+                        Upload Video Manual Lainnya
+                        <input type="file" class="hidden" accept="video/*" onchange="handleManualUpload(event)">
+                    </label>
+                </div>
+            </div>
+
+            <!-- Processing State (Hidden by default) -->
+            <div id="processingArea" class="hidden flex flex-col items-center justify-center p-12 h-80 border border-zinc-800 rounded-2xl bg-zinc-900/50">
+                <svg class="w-12 h-12 text-violet-500 animate-spin mb-6" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <h3 class="text-xl font-medium text-zinc-100 mb-2">AI Clipping Berdasarkan Brief Campaign...</h3>
+                <p class="text-zinc-400 text-sm mb-8 text-center max-w-sm">Memproses audio, mendeteksi hook optimal, dan memotong klip sesuai standar platform Reels/Shorts.</p>
+                <div class="w-full max-w-md bg-zinc-800 rounded-full h-2.5 overflow-hidden">
+                    <div id="progressBar" class="bg-violet-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <div id="progressText" class="mt-3 text-sm font-medium text-zinc-400">0% Selesai</div>
+            </div>
+
+            <!-- Results State (Hidden by default) -->
+            <div id="resultsArea" class="hidden flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-semibold text-zinc-100 flex items-center gap-2">Hasil Klip Otomatis (3 Video)</h3>
+                    <span class="text-xs text-zinc-400">Siap Download / Upload</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="clipsGrid">
+                    <!-- Cards will be populated by JS -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Column: Settings & Payout Panel -->
+        <div class="lg:col-span-1">
+            <div class="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-6 sticky top-6 flex flex-col gap-6">
+                
+                <!-- Akun Terkait & Payout Card -->
+                <div class="bg-zinc-950/80 border border-zinc-800/80 rounded-xl p-4 flex flex-col gap-4">
+                    <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
+                        <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Akun Konten.com & Payout</span>
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    </div>
+                    
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-violet-600/20 border border-violet-500/30 flex items-center justify-center text-violet-400 font-bold text-sm">RC</div>
+                            <div class="overflow-hidden">
+                                <h4 class="text-sm font-semibold text-zinc-200 truncate">Rifal Creator Studio</h4>
+                                <p class="text-xs text-zinc-500 truncate">rifal.creator@konten.id</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-3 flex flex-col gap-2">
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="text-zinc-400">Total Saldo:</span>
+                                <span class="font-bold text-emerald-400 text-sm">Rp 1.450.000</span>
+                            </div>
+                            <button onclick="withdrawBalance()" class="w-full mt-1 py-1.5 px-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold transition-all shadow-md shadow-emerald-900/20 cursor-pointer">
+                                Tarik Saldo (Withdraw)
+                            </button>
+                            <p id="withdrawMsg" class="text-[10px] text-emerald-400 text-center font-medium mt-1 hidden"></p>
+                        </div>
+
+                        <div class="pt-2 border-t border-zinc-800/80">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-zinc-400">Akun Google Payout:</span>
+                                <button id="googleBtnStatus" onclick="toggleGoogleModal()" class="text-xs text-violet-400 hover:underline font-medium">+ Hubungkan Google</button>
+                            </div>
+                            <p id="googleEmailDisplay" class="text-xs text-zinc-300 font-mono mt-1 truncate hidden">📧 rifal.creator@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Account Modal -->
+                <div id="googleModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 max-w-sm w-full shadow-2xl space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-base font-bold text-zinc-100">Hubungkan Akun Google Payout</h3>
+                            <button onclick="toggleGoogleModal()" class="text-zinc-500 hover:text-zinc-300 text-sm">✕</button>
+                        </div>
+                        <p class="text-xs text-zinc-400">Masukkan akun Google/Gmail kamu agar saldo dari Konten.com bisa ditarik langsung.</p>
+                        <input type="email" id="inputGoogleEmail" value="rifal.creator@gmail.com" class="w-full bg-zinc-950 border border-zinc-700 text-zinc-200 text-sm rounded-lg p-2.5 outline-none">
+                        <div class="flex gap-2 pt-2">
+                            <button onclick="toggleGoogleModal()" class="flex-1 py-2 bg-zinc-800 text-zinc-300 rounded-xl text-xs font-medium">Batal</button>
+                            <button onclick="saveGoogleEmail()" class="flex-1 py-2 bg-violet-600 text-white rounded-xl text-xs font-semibold">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brief & Settings Form -->
+                <div class="flex items-center gap-2 pb-2 border-b border-zinc-800">
+                    <h3 class="font-semibold text-zinc-100 text-sm">Brief Campaign & AI Settings</h3>
+                </div>
+
+                <div class="flex flex-col gap-6">
+                    <div>
+                        <label class="text-sm font-medium text-zinc-300 block mb-2">Campaign Brief & Instruksi AI</label>
+                        <textarea id="briefInput" rows="3" class="w-full bg-zinc-800 border border-zinc-700 text-zinc-200 text-sm rounded-lg p-2.5 resize-none outline-none">Ambil momen emosional pendakian gunung, dialog penuh inspirasi, dan adegan dramatis dari film 3726 MDPL.</textarea>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-sm font-medium text-zinc-300">Durasi Target Klip</label>
+                            <span id="durationVal" class="text-xs font-mono bg-zinc-800 px-2 py-1 rounded text-zinc-300">30s</span>
+                        </div>
+                        <input type="range" id="durationRange" min="15" max="90" step="15" value="30" oninput="document.getElementById('durationVal').innerText = this.value + 's'" class="w-full accent-violet-500 bg-zinc-800 h-2 rounded-lg appearance-none cursor-pointer">
+                    </div>
+
+                    <div>
+                        <label class="text-sm font-medium text-zinc-300 block mb-2">Mode Analisis AI</label>
+                        <select id="detectionMode" class="w-full bg-zinc-800 border border-zinc-700 text-zinc-200 text-sm rounded-lg p-2.5 outline-none">
+                            <option value="action">🔥 Action & Moment Puncak</option>
+                            <option value="brief" selected>✨ Sesuai Brief Campaign</option>
+                            <option value="silence">✂️ Filter Bagian Hening</option>
+                        </select>
+                    </div>
+
+                    <div class="pt-4 mt-2 border-t border-zinc-800">
+                        <button onclick="startClippingProcess()" id="generateBtn" class="w-full py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-semibold transition-all bg-violet-600 hover:bg-violet-500 text-white shadow-lg shadow-violet-900/20 cursor-pointer">
+                            <span>Generate Klip Otomatis</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        const campaigns = [
+            {
+                id: 'cmp-mdpl',
+                title: 'Falcon Pictures - 3726 MDPL / Awal Mula Hamka Vol.3',
+                brand: 'Falcon Pictures',
+                duration: '1:45:00',
+                rate: 'Rp6.000 / 1K Views',
+                coverImage: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80',
+                brief: 'Ambil momen emosional pendakian gunung, dialog penuh inspirasi, dan adegan dramatis dari film 3726 MDPL.'
+            },
+            {
+                id: 'cmp-lyto',
+                title: 'PT. Lyto Sukses Bersama - Game Launch Highlight',
+                brand: 'PT. Lyto Sukses Bersama',
+                duration: '45:20',
+                rate: 'Rp5.000 / 1K Views',
+                coverImage: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80',
+                brief: 'Fokus pada cuplikan gameplay pertempuran epik, aksi gacha karakter bintang 5, dan reaksi heboh saat menang raid boss.'
+            },
+            {
+                id: 'cmp-indodax',
+                title: 'Podcast William Sutanto (CEO Indodax) - Crypto Insight',
+                brand: 'Indodax',
+                duration: '1:12:00',
+                rate: 'Rp7.000 / 1K Views',
+                coverImage: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&auto=format&fit=crop&q=80',
+                brief: 'Ambil momen edukatif saat membahas tren market crypto terbaru, tips manajemen risiko, dan pandangan optimis masa depan blockchain.'
+            },
+            {
+                id: 'cmp-mpl',
+                title: 'Kliping Final Playoffs MPL S18 2026',
+                brand: 'PT. Krakatau Karya Abadi',
+                duration: '2:15:10',
+                rate: 'Rp4.000 / 1K Views',
+                coverImage: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format&fit=crop&q=80',
+                brief: 'Cari momen teamfight penentu Lord di menit akhir, aksi retri penentu, dan selebrasi kemenangan dramatis 1v3 clutch.'
+            }
+        ];
+
+        let selectedCampaign = campaigns[0];
+        let googleConnected = false;
+
+        function renderCampaignList() {
+            const container = document.getElementById('campaignListContainer');
+            container.innerHTML = campaigns.map(cmp => `
+                <div onclick="selectCampaign('${cmp.id}')" class="flex items-center justify-between p-3.5 rounded-xl border cursor-pointer transition-all ${selectedCampaign.id === cmp.id ? 'bg-violet-950/30 border-violet-500' : 'bg-zinc-950/60 border-zinc-800 hover:border-violet-500/50'}">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-14 h-11 rounded-lg overflow-hidden shrink-0 relative">
+                            <img src="${cmp.coverImage}" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h5 class="text-sm font-semibold text-zinc-200">${cmp.title}</h5>
+                                <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/30">${cmp.rate}</span>
+                            </div>
+                            <p class="text-xs text-zinc-400 line-clamp-1 mt-0.5">Brief: ${cmp.brief}</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-mono bg-zinc-800/80 px-2.5 py-1 rounded-md text-zinc-400 shrink-0">${cmp.duration}</span>
+                </div>
+            `).join('');
+        }
+
+        function toggleCampaignModal() {
+            const modal = document.getElementById('campaignModal');
+            modal.classList.toggle('hidden');
+            if(!modal.classList.contains('hidden')) renderCampaignList();
+        }
+
+        function selectCampaign(id) {
+            selectedCampaign = campaigns.find(c => c.id === id);
+            document.getElementById('currentCampaignSubtitle').innerText = `${selectedCampaign.brand} - Rate: ${selectedCampaign.rate}`;
+            document.getElementById('mainTitle').innerText = selectedCampaign.title;
+            document.getElementById('mainDuration').innerText = `Tersinkronisasi dengan Brief Campaign (${selectedCampaign.duration})`;
+            document.getElementById('mainCoverImg').src = selectedCampaign.coverImage;
+            document.getElementById('bgCoverImg').src = selectedCampaign.coverImage;
+            document.getElementById('briefInput').value = selectedCampaign.brief;
+            document.getElementById('sourceBadge').innerText = `Sumber video otomatis dari ${selectedCampaign.brand}`;
+            toggleCampaignModal();
+        }
+
+        function handleManualUpload(e) {
+            if(e.target.files && e.target.files[0]) {
+                document.getElementById('mainTitle').innerText = e.target.files[0].name;
+                document.getElementById('mainDuration').innerText = 'Video Lokal Terunggah Siap Proses';
+                document.getElementById('sourceBadge').innerText = 'Sumber video manual lokal';
+            }
+        }
+
+        function startClippingProcess() {
+            document.getElementById('workspaceArea').classList.add('hidden');
+            document.getElementById('resultsArea').classList.add('hidden');
+            document.getElementById('processingArea').classList.remove('hidden');
+            
+            let progress = 0;
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+
+            const timer = setInterval(() => {
+                progress += Math.floor(Math.random() * 18) + 12;
+                if(progress >= 100) {
+                    progress = 100;
+                    clearInterval(timer);
+                    setTimeout(() => {
+                        document.getElementById('processingArea').classList.add('hidden');
+                        document.getElementById('resultsArea').classList.remove('hidden');
+                        renderResults();
+                    }, 400);
+                }
+                progressBar.style.width = progress + '%';
+                progressText.innerText = progress + '% Selesai';
+            }, 300);
+        }
+
+        function renderResults() {
+            const sampleVideos = [
+                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+            ];
+            const titles = ["Klip #1 - Hook & Setup Utama", "Klip #2 - Momen Klimaks Action", "Klip #3 - Kesimpulan & CTA"];
+            const grid = document.getElementById('clipsGrid');
+            const dur = document.getElementById('durationRange').value;
+
+            grid.innerHTML = sampleVideos.map((vid, idx) => `
+                <div class="bg-zinc-900 border border-zinc-800 p-3.5 rounded-xl group">
+                    <div class="relative aspect-video bg-zinc-800 rounded-lg overflow-hidden mb-3">
+                        <video src="${vid}" class="w-full h-full object-cover" muted loop onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"></video>
+                        <div class="absolute top-2 left-2 bg-violet-600 text-white px-2 py-0.5 rounded text-[10px] font-bold">Preview</div>
+                        <div class="absolute bottom-2 right-2 bg-black/70 px-2 py-0.5 rounded text-xs font-mono text-white">00:${dur}</div>
+                    </div>
+                    <h4 class="font-medium text-zinc-200 mb-1 text-sm">${titles[idx]}</h4>
+                    <p class="text-xs text-emerald-400 mb-3 font-medium">98% Sesuai Brief Campaign</p>
+                    <a href="${vid}" download="Klip_${idx+1}.mp4" target="_blank" class="flex justify-center items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white text-xs font-medium py-2 rounded-lg shadow-md">
+                        Download Klip (.mp4)
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        function toggleGoogleModal() {
+            document.getElementById('googleModal').classList.toggle('hidden');
+        }
+
+        function saveGoogleEmail() {
+            const email = document.getElementById('inputGoogleEmail').value;
+            if(email) {
+                googleConnected = true;
+                document.getElementById('googleEmailDisplay').innerText = `📧 ${email}`;
+                document.getElementById('googleEmailDisplay').classList.remove('hidden');
+                document.getElementById('googleBtnStatus').innerText = 'Terhubung';
+                toggleGoogleModal();
+            }
+        }
+
+        function withdrawBalance() {
+            if(!googleConnected) {
+                toggleGoogleModal();
+            } else {
+                const msg = document.getElementById('withdrawMsg');
+                msg.innerText = 'Penarikan saldo Rp 1.450.000 berhasil dikirim ke akun Google/PayPal terdaftar!';
+                msg.classList.remove('hidden');
+                setTimeout(() => msg.classList.add('hidden'), 5000);
+            }
+        }
+    </script>
+</body>
+</html>
